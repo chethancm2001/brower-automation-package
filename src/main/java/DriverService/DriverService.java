@@ -4,7 +4,7 @@ import java.util.Properties;
 
 public class DriverService {
 	
-	public DriverService() throws Exception {
+	private DriverService() throws Exception {
 	
 		String path = System.getProperty("driver.path");
 		System.out.println("driver path " + path);
