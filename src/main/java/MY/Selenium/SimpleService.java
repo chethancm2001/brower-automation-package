@@ -22,29 +22,28 @@ package MY.Selenium;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.Properties;
 
 public class SimpleService {
 	
 	public static void main(String a[]) throws IOException, InterruptedException {
-		System.out.println("Learning the working");
-		ProcessBuilder builder = new ProcessBuilder();
-		builder.command("/home/chethan/Desktop/selenium-core/chromedriver", "--port=9515");
-		Process process = builder.start();
+			
+		// http client 
+		HttpClient client = HttpClient.newHttpClient();
+		
+		// build the request 
+		HttpRequest request = HttpRequest.newBuilder().uri(URI.create("https://example.com")).GET().build();
+		
+		HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+		
+		System.out.println("Status Code: " + response.statusCode());
 		
 		
-		/*
-		 * BufferedReader reader = new BufferedReader(new
-		 * InputStreamReader(process.getInputStream())); String line; while ((line =
-		 * reader.readLine()) != null) { System.out.println(line); }
-		 */
-        
-        System.out.println("it is non blocking");
-        process.destroy();
-        Properties myProp = new Properties();
-        myProp.setProperty("name", "Chethan");
-        System.out.println(myProp.getProperty("name"));
-        
+		
 	}
 	
 }
