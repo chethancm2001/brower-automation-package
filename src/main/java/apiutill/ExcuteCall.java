@@ -29,5 +29,24 @@ public class ExcuteCall {
 		
 	}
 	
+	public static void getUrl(String  apiUrl,String url) throws IOException, InterruptedException {
+		System.out.println("API Url is " + apiUrl);
+		System.out.println("Url is " + url);
+		String body = "{ \"url\": \"" + url + "\" }";
+		System.out.println("body is " + body);
+		HttpClient client = HttpClient.newHttpClient();
+		HttpRequest request = HttpRequest.newBuilder().uri(URI.create(apiUrl)).header("Content-Type", "application/json").POST(HttpRequest.BodyPublishers.ofString("{ \"url\": \"" + url + "\" }")).build();
+		HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+		System.out.println("Status code " + response.statusCode());
+		System.out.println("response body " + response.body());
+		if(response.statusCode() == 200) {
+			System.out.println("Created the session sucessfully");
+		}else {
+			
+		}
+		
+	}
+	
+	
 	
 }

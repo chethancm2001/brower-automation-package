@@ -1,6 +1,9 @@
 package com;
 
+import java.io.IOException;
+
 import DriverService.DriverService;
+import apiutill.ExcuteCall;
 
 public class ChromeDriver implements Driver {
 	
@@ -16,8 +19,9 @@ public class ChromeDriver implements Driver {
 		}
 	}
 	
-	public void get(String url) {
-		
+	public void get(String url) throws IOException, InterruptedException {
+		String apiUrl = DriverService.getUrl()+"/session/"+sessionId +"/url";
+		ExcuteCall.getUrl(apiUrl, url);
 	}
 
 
